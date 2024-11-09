@@ -13,8 +13,13 @@ function Game() {
   const rowComponents = [];
 
   useEffect(() => {
-    globalProps.generateBoard(difficulty);
+    startGame(difficulty);
   }, [difficulty]);
+
+  const startGame = (difficulty) => {
+    globalProps.setDifficulty(difficulty);
+    globalProps.generateBoard(difficulty);
+  };
 
   if (globalProps.board) {
     const board = globalProps.board;
@@ -23,7 +28,7 @@ function Game() {
       const singleRowComponent = [];
       for (let column = 0; column < board[row].length; column++) {
         const key = row + "-" + column;
-        //   console.log(board[row][column]);
+
         const cell = board[row][column];
         const cellEl = <Cell key={key} cell={cell} />;
         singleRowComponent.push(cellEl);
@@ -42,19 +47,19 @@ function Game() {
     <div>
       <div className="button-group">
         <button
-          onClick={() => globalProps.resetGameKey()}
-          className="reset-button"
-        >
-          Reset
-        </button>
-        <button
-          onClick={() => navigate("/game/easy")}
+          onClick={() => {
+            navigate("/game/easy");
+            startGame(difficulty);
+          }}
           className="difficulty-button"
         >
           Play Easy!
         </button>
         <button
-          onClick={() => navigate("/game/medium")}
+          onClick={() => {
+            navigate("/game/medium");
+            startGame(difficulty);
+          }}
           className="difficulty-button"
         >
           Play Medium!
@@ -65,6 +70,9 @@ function Game() {
         >
           Play Hard!
         </button>
+        <button onClick={() => startGame(difficulty)} className="reset-button">
+          Reset
+        </button>
       </div>
 
       <h1>Game: {difficulty.toUpperCase()}</h1>
@@ -74,24 +82,24 @@ function Game() {
           globalProps.boardSize?.columns || "--"
         } `}
       </p>
-      <p>Mines: {globalProps.mineCount || "--"}</p>
+      <p>Mines: {globalProps.mineCount || "0"}</p>
       <div className="game-info">
         <p>Status: {globalProps.gameStatus || "--"}</p>
-        <p>Mines Left: {globalProps.minesLeft || "--"}</p>
+        <p>Mines Left: {globalProps.minesLeft || 0}</p>
       </div>
       {rowComponents}
 
       {globalProps.gameStatus === "lost" && (
         <div className="game-status">
           <p>Game Over! You lost!</p>
-          <button onClick={() => globalProps.resetGameKey()}>Try Again</button>
+          <button onClick={() => startGame(difficulty, true)}>Try Again</button>
         </div>
       )}
 
       {globalProps.gameStatus === "won" && (
         <div className="game-status">
           <p>Game Over! You win!</p>
-          <button onClick={() => globalProps.resetGameKey()}>Play Again</button>
+          <button onClick={() => startGame(difficulty)}>Play Again</button>
         </div>
       )}
     </div>

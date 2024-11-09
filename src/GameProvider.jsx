@@ -8,7 +8,7 @@ export const GameProvider = (props) => {
   const [mineCount, setMineCount] = useState(null);
   const [gameStatus, setGameStatus] = useState(null);
   const [minesLeft, setMinesLeft] = useState(null);
-  const [firstClick, setFirstClick] = useState(true);
+  const [firstClick, setFirstClick] = useState(false);
   const [board, setBoard] = useState(null);
 
   const [gameOverState, setGameOverState] = useState(false);
@@ -22,7 +22,6 @@ export const GameProvider = (props) => {
   //initial board
   const generateBoard = (difficulty) => {
     const { rows, columns, mines } = boardConfig[difficulty];
-
     const baseCell = {
       isMine: false,
       isRevealed: false,
@@ -39,6 +38,7 @@ export const GameProvider = (props) => {
     );
 
     setBoard(newBoard);
+    setFirstClick(true);
     setDifficulty(difficulty);
     setBoardSize({
       rows,
@@ -47,6 +47,7 @@ export const GameProvider = (props) => {
     setMineCount(mines);
     setMinesLeft(mines);
     setGameStatus("playing");
+    setGameOverState(false);
   };
 
   // place mines
@@ -153,6 +154,8 @@ export const GameProvider = (props) => {
     checkForWin(newBoard);
 
     setBoard(newBoard);
+
+    saveInitialSate(difficulty, "board", newBoard);
   };
 
   const checkForWin = (currentBoard) => {
@@ -196,20 +199,13 @@ export const GameProvider = (props) => {
     });
   };
 
-  const resetGameKey = () => {
-    setGameStatus("playing");
-    setFirstClick(true);
-    setGameOverState(false);
-    setMinesLeft(mineCount);
-    generateBoard(difficulty);
-  };
-
   const globalProps = {
     board,
     generateBoard,
-    resetGameKey,
     revealCell,
     flagCell,
+    setDifficulty,
+    difficulty,
     boardSize,
     gameStatus,
     minesLeft,

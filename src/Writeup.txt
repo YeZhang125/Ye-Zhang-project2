@@ -1,0 +1,28 @@
+What were some challenges you faced while making this app?
+One of the biggest challenges in creating this app was designing the components in a way that they interact seamlessly, 
+while ensuring the game’s core functionality worked as expected. 
+A particular focus was on the "Auto Clear" feature,
+which involved clearing adjacent non-mined cells. 
+Implementing this feature required carefully structured logic to check neighboring cells recursively, 
+without affecting performance or creating infinite loops, 
+which was both challenging and rewarding.
+
+
+
+
+Given more time, what additional features, functional or design changes would you make
+I would enhance the app with a "Saved Data" feature. This would allow users to save their game progress, 
+enabling them to return later without losing their current game state. 
+
+
+
+What assumptions did you make while working on this assignment?
+For this project, I assumed that mobile screens would have a width of 576 pixels or less. 
+This informed my design choices, especially regarding responsiveness and layout adjustments for smaller screens.
+
+
+How long did this assignment take to complete?
+15 hours.
+
+
+(Optional) Any feedback on this challenge?  What did you like or not like about implementing this project?

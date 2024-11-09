@@ -1,0 +1,13 @@
+/* ########################## */
+/* styles for mobile */
+/* ########################## */
+@media screen and (max-width: 576px) {
+  div.cell {
+    width: 15px !important;
+    height: 15px !important;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

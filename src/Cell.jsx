@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import GameContext from "./GameContext";
+import "./Cell.css";
 export default function Cell(props) {
   const cell = props.cell;
 
@@ -38,6 +39,9 @@ export default function Cell(props) {
     height: "30px",
     border: "1px solid gray",
     textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     ...getCellStyle(),
   };
 
@@ -48,6 +52,7 @@ export default function Cell(props) {
       onMouseLeave={handleMouseLeave}
       onContextMenu={(e) => handleOnContextMenu(e)}
       onClick={(e) => handleOnClick(e)}
+      className="cell"
     >
       {cell.isRevealed ? (cell.isMine ? "💣" : cell.adjacentMines || "") : ""}
       {cell.isFlagged && !cell.isRevealed ? "🚩" : ""}
