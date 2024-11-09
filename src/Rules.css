@@ -1,0 +1,27 @@
+html,
+body {
+  margin: auto;
+}
+
+#root {
+  margin: 20px;
+}
+
+.rules {
+  padding: 50px;
+}
+
+.play-link {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #46484a;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.play-link:hover {
+  background-color: #070b0f;
+}
